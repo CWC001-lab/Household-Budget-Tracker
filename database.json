@@ -1,0 +1,18 @@
+[
+  {
+    "Username": "david",
+    "Email": "davidchinedu310@gmail.com",
+    "Password": "+gCt+/89GE9Aq+g39eQ6P9Y9FFjkUCwkllCyS64IrrVR0j/7",
+    "Transactions": [
+      {
+        "Amount": -500,
+        "Date": "2025-03-03T23:21:47.7324027Z"
+      },
+      {
+        "Amount": 100,
+        "Date": "2025-03-03T23:21:58.4024187Z"
+      }
+    ],
+    "Budget": 1000
+  }
+]
