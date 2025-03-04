@@ -1,18 +1,19 @@
 [
   {
     "Username": "david",
-    "Email": "davidchinedu310@gmail.com",
-    "Password": "+gCt+/89GE9Aq+g39eQ6P9Y9FFjkUCwkllCyS64IrrVR0j/7",
+    "Email": "david@gmail.com",
+    "Password": "QOTD7XdgPP2QyMRzVslKHMSS753ivnbXbzLno7oPcw4DpCyO",
     "Transactions": [
       {
-        "Amount": -500,
-        "Date": "2025-03-03T23:21:47.7324027Z"
+        "Amount": 5000,
+        "Date": "2025-03-04T01:48:58.5155158Z"
       },
       {
-        "Amount": 100,
-        "Date": "2025-03-03T23:21:58.4024187Z"
+        "Amount": -4000,
+        "Date": "2025-03-04T01:49:18.5138152Z"
       }
     ],
-    "Budget": 1000
+    "Budget": 10000,
+    "BudgetName": "mama fees"
   }
 ]

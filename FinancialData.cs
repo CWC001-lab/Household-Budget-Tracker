@@ -11,6 +11,7 @@ public class UserInfo
     public string Password { get; set; }
     public List<TransactionInfo> Transactions { get; set; }
     public int Budget { get; set; }
+    public string BudgetName { get; set; }
 }
 
 public class TransactionInfo
