@@ -49,8 +49,8 @@ public class TransactionsForm : Form
             {
                 if (transaction is TransactionInfo newTransaction)
                 {
-                    string transactionType = newTransaction.Amount >= 0 ? "Income" : "Expense";
-                    string transactionAmount = $"{Math.Abs(newTransaction.Amount):N2} on {newTransaction.Date:yyyy-MM-dd}";
+                    string transactionType = newTransaction.IsIncome ? "Income" : "Expense";
+                    string transactionAmount = $"{Math.Abs(newTransaction.Amount):N2} on {newTransaction.Date:yyyy-MM-dd} ({newTransaction.Name})";
                     listBox.Items.Add($"{transactionType}: NGN {transactionAmount}");
                 }
                 else

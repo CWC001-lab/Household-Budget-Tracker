@@ -18,4 +18,6 @@ public class TransactionInfo
 {
     public int Amount { get; set; }
     public DateTime Date { get; set; }
+    public string Name { get; set; }
+    public bool IsIncome { get; set; }
 }

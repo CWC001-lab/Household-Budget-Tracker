@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 public class DashboardForm : Form
 {
     private Label cardText;
+    private Label budgetText;
 
     //this is a custom  class will be used in other classes
     public delegate void DataChangedEventHandler(object sender, EventArgs e);  
@@ -33,7 +34,7 @@ public class DashboardForm : Form
 
     private void InitializeComponents()
     {
-        this.Text = "Dashboard";
+        this.Text = "Expense Calculator";
         this.Size = new System.Drawing.Size(1200, 600);
         this.StartPosition = FormStartPosition.CenterScreen;
         this.Font = new Font("Arial", 12);
@@ -164,12 +165,25 @@ public class DashboardForm : Form
             transactionListContent.Refresh();
         };
 
+        // Create a new label for displaying the budget
+        budgetText = new Label
+        {
+            Text = "Budget: NGN 0",
+            AutoSize = true,
+            Location = new Point(20, 100),
+            Font = new Font("Arial", 16),
+            ForeColor = ColorTranslator.FromHtml("#545f71")
+        };
+        cardPanel.Controls.Add(budgetText);
+
         // Set the form's background color to white
         this.BackColor = Color.White;
 
         // Set the color of all text-containing controls
         Color textColor = ColorTranslator.FromHtml("#545f71");
 
+        UpdateTotalAmount(email);
+        UpdateBudgetDisplay(email);
     }
 
 
@@ -426,5 +440,26 @@ public class DashboardForm : Form
 
         // Return a default value if unable to get the budget
         return 0;
+    }
+
+    // Updated method to fetch and display the budget name and amount
+    private void UpdateBudgetDisplay(string email)
+    {
+        string filePath = "./database.json";
+        try
+        {
+            string jsonData = File.ReadAllText(filePath);
+            List<UserInfo> users = JsonConvert.DeserializeObject<List<UserInfo>>(jsonData) ?? new List<UserInfo>();
+
+            var user = users.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                budgetText.Text = $"Budget: NGN {user.Budget} ({user.BudgetName})";
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("An error occurred while getting the user's budget: " + ex.Message);
+        }
     }
 }

@@ -1,9 +1,12 @@
 using Newtonsoft.Json;
 using static DashboardForm;
 
-
 public class IncomeRecordForm : Form
 {
+    private TextBox nameTextBox;
+    private TextBox amountTextBox;
+    private DateTimePicker datePicker;
+    private Button saveButton;
     private string email;
     private readonly DataChangedEventHandler dataChangedCallback;
 
@@ -20,46 +23,60 @@ public class IncomeRecordForm : Form
         this.Size = new System.Drawing.Size(400, 300);
         this.StartPosition = FormStartPosition.CenterScreen;
 
-        Label amountLabel = new Label
+        Label nameLabel = new Label
         {
-            Text = "Amount:",
+            Text = "Income Name:",
             Location = new System.Drawing.Point(20, 20),
             Font = new System.Drawing.Font("Arial", 12),
         };
 
-        TextBox amountTextBox = new TextBox
+        nameTextBox = new TextBox
         {
-            Location = new System.Drawing.Point(120, 20),
+            Location = new System.Drawing.Point(150, 20),
+            Size = new System.Drawing.Size(200, 20),
+        };
+
+        Label amountLabel = new Label
+        {
+            Text = "Amount:",
+            Location = new System.Drawing.Point(20, 50),
+            Font = new System.Drawing.Font("Arial", 12),
+        };
+
+        amountTextBox = new TextBox
+        {
+            Location = new System.Drawing.Point(150, 50),
             Size = new System.Drawing.Size(200, 20),
         };
 
         Label dateLabel = new Label
         {
             Text = "Date Received:",
-            Location = new System.Drawing.Point(20, amountTextBox.Bottom + 25),
+            Location = new System.Drawing.Point(20, amountTextBox.Bottom + 20),
             Font = new System.Drawing.Font("Arial", 12),
         };
 
-        DateTimePicker datePicker = new DateTimePicker
+        datePicker = new DateTimePicker
         {
             Location = new System.Drawing.Point(150, amountTextBox.Bottom + 20),
-            Size = new System.Drawing.Size(170, 20),
+            Size = new System.Drawing.Size(200, 20),
             Format = DateTimePickerFormat.Short,
         };
 
-        Button saveButton = new Button
+        saveButton = new Button
         {
             Text = "Save",
             Location = new System.Drawing.Point(150, datePicker.Bottom + 30),
             Size = new System.Drawing.Size(100, 30),
             Font = new System.Drawing.Font("Arial", 12),
         };
-
         saveButton.Click += (sender, e) =>
         {
-            SaveIncomeRecord(amountTextBox.Text, email);
+            SaveIncomeRecord(nameTextBox.Text, amountTextBox.Text, email);
         };
 
+        this.Controls.Add(nameLabel);
+        this.Controls.Add(nameTextBox);
         this.Controls.Add(amountLabel);
         this.Controls.Add(amountTextBox);
         this.Controls.Add(dateLabel);
@@ -67,8 +84,7 @@ public class IncomeRecordForm : Form
         this.Controls.Add(saveButton);
     }
 
-    // Update SaveIncomeRecord method
-    private void SaveIncomeRecord(string amount, string email)
+    private void SaveIncomeRecord(string name, string amount, string email)
     {
         if (string.IsNullOrWhiteSpace(amount) || !int.TryParse(amount, out int parsedAmount) || parsedAmount <= 0)
         {
@@ -95,11 +111,11 @@ public class IncomeRecordForm : Form
                 user.Transactions = new List<TransactionInfo>();
             }
 
-            // Updating the Transactions list
             user.Transactions.Add(new TransactionInfo
             {
                 Amount = parsedAmount,
-                Date = DateTime.UtcNow // Use UTC time for consistency
+                Name = name,
+                Date = DateTime.UtcNow
             });
 
             string updatedJsonData = JsonConvert.SerializeObject(users, Formatting.Indented);

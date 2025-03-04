@@ -26,16 +26,29 @@ public class ExpenseRecordForm : Form
         this.Size = new System.Drawing.Size(400, 300);
         this.StartPosition = FormStartPosition.CenterScreen;
 
+        Label nameLabel = new Label
+        {
+            Text = "Expense Name:",
+            Location = new System.Drawing.Point(20, 20),
+            Font = new System.Drawing.Font("Arial", 12),
+        };
+
+        TextBox nameTextBox = new TextBox
+        {
+            Location = new System.Drawing.Point(150, 20),
+            Size = new System.Drawing.Size(200, 20),
+        };
+
         Label amountLabel = new Label
         {
             Text = "Amount:",
-            Location = new System.Drawing.Point(20, 20),
+            Location = new System.Drawing.Point(20, 50),
             Font = new System.Drawing.Font("Arial", 12),
         };
 
         amountTextBox = new TextBox
         {
-            Location = new System.Drawing.Point(120, 20),
+            Location = new System.Drawing.Point(120, 50),
             Size = new System.Drawing.Size(200, 20),
         };
 
@@ -62,16 +75,18 @@ public class ExpenseRecordForm : Form
 
         saveButton = new Button
         {
-            Text = "Save Expense",
-            Location = new System.Drawing.Point(150, datePicker.Bottom + 30),
-            Size = new System.Drawing.Size(150, 30),
+            Text = "Save",
+            Location = new System.Drawing.Point(150, 100),
+            Size = new System.Drawing.Size(100, 30),
             Font = new System.Drawing.Font("Arial", 12),
         };
         saveButton.Click += (sender, e) =>
         {
-            SaveButton_Click(amountTextBox.Text, email);
+            SaveExpenseRecord(nameTextBox.Text, amountTextBox.Text, email);
         };
 
+        this.Controls.Add(nameLabel);
+        this.Controls.Add(nameTextBox);
         this.Controls.Add(amountLabel);
         this.Controls.Add(amountTextBox);
         this.Controls.Add(dateLabel);
@@ -80,7 +95,7 @@ public class ExpenseRecordForm : Form
     }
 
     //Updated
-    private void SaveButton_Click(string amount, string email)
+    private void SaveExpenseRecord(string name, string amount, string email)
     {
         if (string.IsNullOrWhiteSpace(amount) || !int.TryParse(amount, out int parsedAmount) || parsedAmount <= 0)
         {
@@ -113,10 +128,11 @@ public class ExpenseRecordForm : Form
                 user.Transactions = new List<TransactionInfo>();
             }
 
-            // Expenses are negative, so we add the amount as a negative value
+            // Store the expense with name and amount
             user.Transactions.Add(new TransactionInfo
             {
                 Amount = -parsedAmount,
+                Name = name, // Store the expense name
                 Date = DateTime.UtcNow // Use UTC time for consistency
             });
 

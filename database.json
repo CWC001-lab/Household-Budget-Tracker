@@ -1,19 +1,25 @@
 [
   {
-    "Username": "david",
-    "Email": "david@gmail.com",
-    "Password": "QOTD7XdgPP2QyMRzVslKHMSS753ivnbXbzLno7oPcw4DpCyO",
+    "Username": "Hassan",
+    "Email": "hassan@gmail.com",
+    "Password": "wSztZ9w0NNxxbh8r2lrE5JMZPpIXKVXrX/0l98LLyyPhc9Ol",
     "Transactions": [
       {
-        "Amount": 5000,
-        "Date": "2025-03-04T01:48:58.5155158Z"
-      },
-      {
-        "Amount": -4000,
-        "Date": "2025-03-04T01:49:18.5138152Z"
+        "Amount": -199,
+        "Date": "2025-03-04T02:30:45.5917784Z",
+        "Name": "red",
+        "IsIncome": false
       }
     ],
-    "Budget": 10000,
-    "BudgetName": "mama fees"
+    "Budget": 1000,
+    "BudgetName": "feeding"
+  },
+  {
+    "Username": "Hassan",
+    "Email": "hassan@gmail.com",
+    "Password": "HoCm9l6eBVCVDn7zYw49JPuhCdRZ/5HFoGo8WZK2VCOzInBO",
+    "Transactions": [],
+    "Budget": 0,
+    "BudgetName": null
   }
 ]
